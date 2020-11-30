@@ -1,9 +1,6 @@
-Sub Test():
+Sub Stocks():
 
     Dim CurrentWS As Worksheet
-    Dim need_summary_table_header As Boolean
-    
-    need_summary_table_header = False
     
     For Each CurrentWS In Worksheets
     
@@ -14,11 +11,14 @@ Sub Test():
         stock_volume = 0
     
         Dim open_price As Double
-        open_price = 0
+	open_price = CurrentWS.Cells(2, 3).Value
+
         Dim close_price As Double
         close_price = 0
+
         Dim yearly_change As Double
         yearly_change = 0
+
         Dim percent_change As Double
         percent_change = 0
     
@@ -28,17 +28,7 @@ Sub Test():
         Dim summary_table_row As Long
         summary_table_row = 2
         
-        If need_summary_table_header Then
-            CurrentWS.Range("I1").Value = "Ticker"
-            CurrentWS.Range("J1").Value = "Yearly Change"
-            CurrentWS.Range("K1").Value = "Percent Change"
-            CurrentWS.Range("L1").Value = "Total Stock Volume"
-        Else
-            need_summary_table_header = True
-         
-        End If
-        
-        open_price = CurrentWS.Cells(2, 3).Value
+        CurrentWS.Range("I1:L1").Value = Array("Ticker", "Yearly Change", "Percent Change", "Total Stock Volume")
     
         For i = 2 To rowcount
     
